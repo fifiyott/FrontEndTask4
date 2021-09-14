@@ -9,18 +9,18 @@ import data from '../data-dummy/data.json'
 export default function Home() {
   const [ formList, setformList ] = useState(data);
 
-  const [isUpdate, setIsUpdate] = useState({ id: null, status: false });
+  const [updateData, setUpdateData] = useState({ id: null, status: false });
 
-  const [formData, setFormData] = useState({
+  const [formInput, setFormInput] = useState({
     title: "",
     quantity: "",
     price: ""
   });
 
   function handleChange(e) {
-    let dataList = {...formData};
+    let dataList = {...formInput};
     dataList[e.target.name] = e.target.value;
-    setFormData(dataList);
+    setFormInput(dataList);
   }
 
   function handleSubmit(e) {
@@ -30,39 +30,39 @@ export default function Home() {
 
 
     //supaya inputan yang kosong jika diklik submit, tidak tercetak outputnya
-    if (formData.title === ""){
+    if (formInput.title === ""){
       return false;
     }
-    if (formData.quantity === ""){
+    if (formInput.quantity === ""){
       return false;
     }
-    if (formData.price === ""){
+    if (formInput.price === ""){
       return false;
     }
 
-    if (isUpdate.status){
+    if (updateData.status){
       dataList.forEach((list) => {
-        if(list.id === isUpdate.id){
-          list.title = formData.title;
-          list.quantity = formData.quantity;
-          list.price = formData.price;
+        if(list.id === updateData.id){
+          list.title = formInput.title;
+          list.quantity = formInput.quantity;
+          list.price = formInput.price;
         }
       });
     } else {
-        dataList.push({ id: uid(), title: formData.title, quantity: formData.quantity, price: formData.price });
+        dataList.push({ id: uid(), title: formInput.title, quantity: formInput.quantity, price: formInput.price });
 
     }
 
-    setIsUpdate({ id: null, status: false });
+    setUpdateData({ id: null, status: false });
     setformList(dataList);
-    setFormData({ title: "", quantity: "", price: "" });
+    setFormInput({ title: "", quantity: "", price: "" });
   }
 
   function handleEdit(id) {
     let dataList = [...formList];
     let foundData = dataList.find((list) => list.id === id);
-    setFormData({ title: foundData.title, quantity: foundData.quantity, price:foundData.price });
-    setIsUpdate({ id: id, status: true });
+    setFormInput({ title: foundData.title, quantity: foundData.quantity, price:foundData.price });
+    setUpdateData({ id: id, status: true });
   }
 
   function handleDelete(id){
@@ -78,14 +78,13 @@ export default function Home() {
         <title>List Form</title>
         <meta name="keywords" content="list"></meta>
       </Head>
-      {/* <h1 className="px-3 py-3">List Form</h1> */}
 
       <form onSubmit={handleSubmit} className="form-universal">
         <div className="form-group">
           <input 
             type="text"  
             onChange={handleChange}
-            value={formData.title} 
+            value={formInput.title} 
             name="title"
             className="input"
             placeholder=" Title" />
@@ -94,7 +93,7 @@ export default function Home() {
           <input 
             type="text"  
             onChange={handleChange}
-            value={formData.quantity} 
+            value={formInput.quantity} 
             name="quantity" 
             className="input"
             placeholder=" Quantity"/>
@@ -103,7 +102,7 @@ export default function Home() {
           <input 
             type="text"  
             onChange={handleChange}
-            value={formData.price} 
+            value={formInput.price} 
             name="price"
             className="input"
             placeholder=" Price" />
