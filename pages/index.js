@@ -87,7 +87,7 @@ export default function Home() {
             value={formInput.title} 
             name="title"
             className="input"
-            placeholder=" Title" />
+            placeholder="Title" />
         </div>
         <div className="form-group">
           <input 
@@ -96,7 +96,7 @@ export default function Home() {
             value={formInput.quantity} 
             name="quantity" 
             className="input"
-            placeholder=" Quantity"/>
+            placeholder="Quantity"/>
         </div>
         <div className="form-group">
           <input 
@@ -105,7 +105,7 @@ export default function Home() {
             value={formInput.price} 
             name="price"
             className="input"
-            placeholder=" Price" />
+            placeholder="Price" />
         </div>
         <div>
           <button type="submit" className="btnSubmit">
